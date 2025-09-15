@@ -10,6 +10,6 @@ services:
         value: 1g
       - key: langtool_pipelinePrewarming
         value: "true"
-      # Optional but helps Render detect the port quicker:
+      # optional hint for Render; LT listens on 8010
       - key: PORT
         value: "8010"
