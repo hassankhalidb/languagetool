@@ -1,8 +1,15 @@
 services:
   - type: web
     name: languagetool
-    env: docker
+    runtime: docker
+    image: erikvl87/languagetool:latest
     plan: free
-    dockerfilePath: Dockerfile
     healthCheckPath: /v2/check
-    autoDeploy: true
+    envVars:
+      - key: Java_Xmx
+        value: 1g
+      - key: langtool_pipelinePrewarming
+        value: "true"
+      # Optional but helps Render detect the port quicker:
+      - key: PORT
+        value: "8010"
