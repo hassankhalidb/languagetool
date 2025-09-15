@@ -1,15 +1,17 @@
+---
+
+version: "3"
+
 services:
-  - type: web
-    name: languagetool
-    env: docker
-    image:
-      url: erikvl87/languagetool:latest
-    plan: free
-    healthCheckPath: /v2/check
-    envVars:
-      - key: Java_Xmx
-        value: 1g
-      - key: langtool_pipelinePrewarming
-        value: "true"
-      - key: PORT
-        value: "8010"
+  languagetool:
+    image: erikvl87/languagetool
+    container_name: languagetool
+    ports:
+      - 8010:8010                        # Using default port from the image
+    environment:
+      - langtool_languageModel=/ngrams   # OPTIONAL: Using ngrams data
+      - Java_Xms=512m                    # OPTIONAL: Setting a minimal Java heap size of 512 mib
+      - Java_Xmx=1g                      # OPTIONAL: Setting a maximum Java heap size of 1 Gib
+    volumes:
+      - /path/to/ngrams/data:/ngrams     # OPTIONAL: The location of ngrams data on the local machine
+      - /path/to/logback.xml:/LanguageTool/logback.xml:ro  # OPTIONAL: Overwrite the logging configuration
