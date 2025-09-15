@@ -1,8 +1,9 @@
 services:
   - type: web
     name: languagetool
-    runtime: docker
-    image: erikvl87/languagetool:latest
+    env: docker
+    image:
+      url: erikvl87/languagetool:latest
     plan: free
     healthCheckPath: /v2/check
     envVars:
@@ -10,6 +11,5 @@ services:
         value: 1g
       - key: langtool_pipelinePrewarming
         value: "true"
-      # optional hint for Render; LT listens on 8010
       - key: PORT
         value: "8010"
